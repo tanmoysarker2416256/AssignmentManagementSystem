@@ -40,6 +40,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
+builder.Services.AddScoped<ISubmissionService, SubmissionService>();
+builder.Services.AddScoped<IUserService, UserService>();
 //jwt 
 
 builder.Services.AddScoped<JwtTokenGenerator>();
@@ -97,6 +99,18 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+//cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 
 
 var app = builder.Build();
@@ -111,6 +125,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 

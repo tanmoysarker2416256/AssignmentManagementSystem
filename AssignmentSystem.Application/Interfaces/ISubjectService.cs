@@ -13,4 +13,6 @@ public interface ISubjectService
     Task<SubjectDto?> GetByIdAsync(int id);
     Task<SubjectDto> CreateAsync(CreateSubjectDto dto);
     Task DeleteAsync(int id);
+
+    Task<IEnumerable<SubjectDto>> GetForTeacherAsync(string teacherId);
 }

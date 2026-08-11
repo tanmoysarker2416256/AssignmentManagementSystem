@@ -43,4 +43,18 @@ public static class MappingExtensions
         Status = AssignmentStatus.Draft // always starts as Draft — publishing is separate
     };
 
+    public static SubmissionDto ToDto(this Submission entity) => new(
+    entity.Id,
+    entity.AssignmentId,
+    entity.Assignment?.Title ?? string.Empty,
+    entity.StudentId,
+    entity.Student?.FullName ?? string.Empty,
+    entity.Content,
+    entity.SubmittedAt,
+    entity.Status.ToString(),
+    entity.Marks,
+    entity.Feedback,
+    entity.GradedAt
+);
+
 }

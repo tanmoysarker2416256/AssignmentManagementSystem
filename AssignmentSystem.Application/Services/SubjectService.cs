@@ -40,4 +40,13 @@ public class SubjectService : ISubjectService
         _unitOfWork.Subjects.Remove(entity);
         await _unitOfWork.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<SubjectDto>> GetForTeacherAsync(string teacherId)
+    {
+        var links = await _unitOfWork.TeacherSubjects.FindAsync(ts => ts.TeacherId == teacherId);
+        var subjectIds = links.Select(l => l.SubjectId).ToHashSet();
+
+        var subjects = await _unitOfWork.Subjects.GetAllAsync(s => s.Class);
+        return subjects.Where(s => subjectIds.Contains(s.Id)).Select(s => s.ToDto());
+    }
 }
