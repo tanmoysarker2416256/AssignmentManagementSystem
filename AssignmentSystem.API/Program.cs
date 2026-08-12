@@ -14,7 +14,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// add services to the container.
 
 builder.Services.AddControllers();
 
@@ -26,7 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    options.Password.RequireNonAlphanumeric = false; // relaxed for demo creds — note in README
+    options.Password.RequireNonAlphanumeric = false; 
 })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
@@ -73,7 +73,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
@@ -115,7 +115,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//  http request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

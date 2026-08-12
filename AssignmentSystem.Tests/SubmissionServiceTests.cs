@@ -12,7 +12,7 @@ public class SubmissionServiceTests
     private readonly Mock<IUnitOfWork> _unitOfWorkMock;
     private readonly Mock<IRepository<Submission>> _submissionRepoMock;
     private readonly Mock<IRepository<Assignment>> _assignmentRepoMock;
-    private readonly SubmissionService _sut; // "system under test" — common naming convention
+    private readonly SubmissionService _sut; // "system under test"  common naming convention
 
     public SubmissionServiceTests()
     {
@@ -29,7 +29,7 @@ public class SubmissionServiceTests
     [Fact]
     public async Task SubmitOrUpdateAsync_FirstSubmissionAfterDeadline_MarksAsLate()
     {
-        // Arrange
+        // arrange
         var assignment = new Assignment
         {
             Id = 1,
@@ -44,10 +44,10 @@ public class SubmissionServiceTests
 
         var dto = new SubmitDto(1, "My answer");
 
-        // Act
+        // act
         var result = await _sut.SubmitOrUpdateAsync(dto, "student-1");
 
-        // Assert
+        // assert
         Assert.Equal("Late", result.Status);
     }
 

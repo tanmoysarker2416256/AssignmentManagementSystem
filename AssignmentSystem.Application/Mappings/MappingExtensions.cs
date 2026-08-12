@@ -40,7 +40,7 @@ public static class MappingExtensions
         Deadline = dto.Deadline,
         MaxMarks = dto.MaxMarks,
         TeacherId = teacherId,
-        Status = AssignmentStatus.Draft // always starts as Draft — publishing is separate
+        Status = AssignmentStatus.Draft // always starts as draft and publishing is separate 
     };
 
     public static SubmissionDto ToDto(this Submission entity) => new(

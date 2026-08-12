@@ -16,4 +16,6 @@ public class Subject
 
     public ICollection<TeacherSubject> TeacherSubjects { get; set; } = new List<TeacherSubject>();
     public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
+
+ 
 }

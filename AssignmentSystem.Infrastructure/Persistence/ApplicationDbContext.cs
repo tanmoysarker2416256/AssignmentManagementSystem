@@ -17,7 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(builder); // MUST come first — wires up Identity's own tables
+        base.OnModelCreating(builder); 
 
         builder.Entity<ApplicationUser>()
             .HasOne(u => u.Class)

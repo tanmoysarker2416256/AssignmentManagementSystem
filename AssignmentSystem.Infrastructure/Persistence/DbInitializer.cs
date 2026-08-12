@@ -10,7 +10,7 @@ public static class DbInitializer
         RoleManager<IdentityRole> roleManager,
         ApplicationDbContext context)
     {
-        // 1. Create the three roles if they don't already exist
+        
         string[] roles = { "Admin", "Teacher", "Student" };
         foreach (var role in roles)
         {
@@ -18,7 +18,9 @@ public static class DbInitializer
                 await roleManager.CreateAsync(new IdentityRole(role));
         }
 
-        // 2. Seed a Class + Subject first, since Student/TeacherSubject depend on them
+
+
+
         if (!context.Classes.Any())
         {
             context.Classes.Add(new Class { Name = "Grade 10 - A" });
@@ -27,7 +29,7 @@ public static class DbInitializer
 
         if (!context.Subjects.Any())
         {
-            var anyClass = context.Classes.First(); // safe now — we just guaranteed at least one exists
+            var anyClass = context.Classes.First(); 
             context.Subjects.Add(new Subject { Name = "Mathematics", ClassId = anyClass.Id });
             await context.SaveChangesAsync();
         }
@@ -35,7 +37,8 @@ public static class DbInitializer
         var classId = context.Classes.First().Id;
         var subjectId = context.Subjects.First().Id;
 
-        // 3. Seed Admin
+
+        
         if (await userManager.FindByEmailAsync("admin@demo.com") == null)
         {
             var admin = new ApplicationUser
@@ -49,7 +52,7 @@ public static class DbInitializer
             await userManager.AddToRoleAsync(admin, "Admin");
         }
 
-        // 4. Seed Teacher
+       
         ApplicationUser teacher;
         var existingTeacher = await userManager.FindByEmailAsync("teacher@demo.com");
         if (existingTeacher == null)
@@ -69,14 +72,19 @@ public static class DbInitializer
             teacher = existingTeacher;
         }
 
-        // Independent check — runs regardless of whether the teacher user already existed
+
+
+       
+
         if (!context.TeacherSubjects.Any(ts => ts.TeacherId == teacher.Id && ts.SubjectId == subjectId))
         {
             context.TeacherSubjects.Add(new TeacherSubject { TeacherId = teacher.Id, SubjectId = subjectId });
             await context.SaveChangesAsync();
         }
 
-        // 5. Seed Student
+
+
+       
         var existingStudent = await userManager.FindByEmailAsync("student@demo.com");
         if (existingStudent == null)
         {
@@ -93,7 +101,7 @@ public static class DbInitializer
         }
         else if (existingStudent.ClassId == null)
         {
-            // heals a student left classless if their Class was deleted (SetNull cascade) during testing
+          
             existingStudent.ClassId = classId;
             await userManager.UpdateAsync(existingStudent);
         }
