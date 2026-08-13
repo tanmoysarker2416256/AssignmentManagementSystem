@@ -1,5 +1,8 @@
 # Assignment & Submission Management System
 
+**Live Demo:** https://assignment-management-system-7cciqbuqi-hello-f759.vercel.app/login
+*(Frontend UI only — the backend runs locally and isn't deployed. Clone the repo and follow setup instructions below to run the full application.)*
+
 A role-based web application for schools/colleges that lets Teachers create and manage assignments, Students view and submit their work, and Admins manage users, classes, and subjects — built as a fully decoupled REST API backend with a separate Next.js frontend.
 
 ## Overview
